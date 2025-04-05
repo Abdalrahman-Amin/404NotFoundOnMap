@@ -13,11 +13,16 @@ function App() {
          <BrowserRouter>
             {/* <PageNav /> */}
             <Routes>
-               <Route path="/" element={<Homepage />} />
+               <Route index element={<Homepage />} />
                <Route path="/product" element={<Product />} />
                <Route path="/pricing" element={<Pricing />} />
                <Route path="/login" element={<Login />} />
-               <Route path="/app" element={<AppLayout />} />
+               <Route path="/app" element={<AppLayout />}>
+                  <Route index element={<p>cities route</p>} />
+                  <Route path="cities" element={<p>cities route</p>} />
+                  <Route path="countries" element={<p>countries route</p>} />
+                  <Route path="form" element={<p>form route</p>} />
+               </Route>
                <Route path="*" element={<PageNotFound />} />
             </Routes>
          </BrowserRouter>
