@@ -7,21 +7,10 @@ import Pricing from "./pages/Pricing";
 import Login from "./pages/Login";
 import CityList from "./components/CityList";
 import { useEffect, useState } from "react";
+import CountryList from "./components/CountryList";
+import { CityType } from "./types/types";
 
 const BASE_URL = "http://localhost:8000";
-
-export interface CityType {
-   cityName: string;
-   country: string;
-   emoji: string;
-   date: string;
-   notes: string;
-   position: {
-      lat: number;
-      lng: number;
-   };
-   id: number;
-}
 
 function App() {
    const [cities, setCities] = useState<CityType[]>([]);
@@ -74,7 +63,12 @@ function App() {
                         <CityList cities={cities} isLoading={isLoading} />
                      }
                   />
-                  <Route path="countries" element={<p>countries route</p>} />
+                  <Route
+                     path="countries"
+                     element={
+                        <CountryList cities={cities} isLoading={isLoading} />
+                     }
+                  />
                   <Route path="form" element={<p>form route</p>} />
                </Route>
                <Route path="*" element={<PageNotFound />} />
