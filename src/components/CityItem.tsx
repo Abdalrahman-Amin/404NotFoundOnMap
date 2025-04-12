@@ -1,4 +1,4 @@
-import { CityType } from "../App";
+import { CityType } from "../types/types";
 import formatDate from "../utils/formatDate";
 import styles from "./CityItem.module.css";
 

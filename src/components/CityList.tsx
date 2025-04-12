@@ -1,4 +1,4 @@
-import { CityType } from "../App";
+import { CityType } from "../types/types";
 import CityItem from "./CityItem";
 import styles from "./CityList.module.css";
 import Message from "./Message";
