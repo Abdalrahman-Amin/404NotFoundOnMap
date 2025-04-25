@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Homepage from "./pages/Homepage";
 import AppLayout from "./pages/AppLayout";
 import PageNotFound from "./pages/PageNotFound";
@@ -53,12 +53,9 @@ function App() {
                <Route path="/pricing" element={<Pricing />} />
                <Route path="/login" element={<Login />} />
                <Route path="/app" element={<AppLayout />}>
-                  <Route
-                     index
-                     element={
-                        <CityList cities={cities} isLoading={isLoading} />
-                     }
-                  />
+                  <Route index element={<Navigate to="cities" replace />} />
+                  {/* replace: replace the current entry in the browser history stack instead of adding a new one */}
+                  {/* Navigate: navigate to a different route without adding a new entry to the history stack (e.g. when the user is logged in) */}
                   <Route
                      path="cities"
                      element={
