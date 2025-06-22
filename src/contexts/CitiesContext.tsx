@@ -34,6 +34,7 @@ function CitiesProvider({ children }: { children: React.ReactNode }) {
         setCities(data);
       } catch (err) {
         if ((err as Error).name !== "AbortError") {
+            console.error("Failed to fetch cities:", err);
         }
       } finally {
         setIsLoading(false);

@@ -37,28 +37,28 @@
          "id": 98443197
       },
       {
-         "cityName": "Faro",
-         "country": "Portugal",
-         "emoji": "🇵🇹",
-         "date": "2027-10-31T15:59:59.138Z",
-         "notes": "My favorite city so far!",
-         "position": {
-            "lat": 38.727881642324164,
-            "lng": -9.140900099907554
-         },
-         "id": 739303851
-      },
-      {
-         "cityName": "Barcelona",
-         "country": "Spain",
-         "emoji": "🇪🇸",
-         "date": "2027-07-15T08:22:53.976Z",
+         "cityName": "Paris",
+         "country": "France",
+         "emoji": "🇫🇷",
+         "date": "2026-12-25T10:00:00.000Z",
          "notes": "",
          "position": {
-            "lat": 40.46635901755316,
-            "lng": -3.7133789062500004
+            "lat": 48.856614,
+            "lng": 2.3522219
          },
-         "id": 178067512
+         "id": 12345678
+      },
+      {
+         "cityName": "Rome",
+         "country": "Italy",
+         "emoji": "🇮🇹",
+         "date": "2026-11-30T12:00:00.000Z",
+         "notes": "Can't wait to visit again!",
+         "position": {
+            "lat": 41.902782,
+            "lng": 12.496366
+         },
+         "id": 87654321
       }
    ]
 }
