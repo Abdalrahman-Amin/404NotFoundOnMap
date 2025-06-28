@@ -7,26 +7,24 @@ import {
   useMap,
   useMapEvents,
 } from "react-leaflet";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useCities } from "../contexts/CitiesContext";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useGeolocation } from "../hooks/useGeolocation";
 import Button from "./Button";
+import { useUrlPosition } from "../hooks/useUrlPosition";
 function Map() {
-  const [searchParams] = useSearchParams();
+  const [lat, lng] = useUrlPosition();
   const {
     getPosition,
     position: geoLocationPosition,
     isLoading: isLoadingPosition,
   } = useGeolocation();
-  const lat = searchParams.get("lat");
-  const lng = searchParams.get("lng");
   const [mapPosition, setMapPosition] = useState([51.505, -0.09]); // Default position (London)
   const { cities } = useCities();
 
   useEffect(() => {
     if (lat && lng) {
-      console.log("DEBUG MAP", typeof lat, lng);
       setMapPosition([lat, lng]);
     }
   }, [lat, lng]);
@@ -83,7 +81,6 @@ function DetectClick() {
   const navigate = useNavigate();
   useMapEvents({
     click: (e) => {
-      console.log("DEBUG: ~ DetectClick ~ e:", e);
       navigate(`form?lat=${e.latlng.lat}&lng=${e.latlng.lng}`);
     },
   });

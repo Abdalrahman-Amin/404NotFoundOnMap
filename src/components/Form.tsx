@@ -1,9 +1,10 @@
 // "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=0&longitude=0"
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Form.module.css";
 import Button from "./Button";
 import ButtonBack from "./ButtonBack";
+import { useUrlPosition } from "../hooks/useUrlPosition";
 
 export function convertToEmoji(countryCode) {
   const codePoints = countryCode
@@ -13,10 +14,46 @@ export function convertToEmoji(countryCode) {
   return String.fromCodePoint(...codePoints);
 }
 
+const BASE_URL = "https://api.bigdatacloud.net/data/reverse-geocode-client";
+
 function Form() {
+  const [lat, lng] = useUrlPosition();
+  
+  const [isLoadingGeocoding, setIsLoadingGeocoding] = useState(false);
+
   const [cityName, setCityName] = useState("");
+  const [Country, setCountry] = useState("");
   const [date, setDate] = useState(new Date());
   const [notes, setNotes] = useState("");
+  
+  useEffect(() => {
+   const controller = new AbortController();
+   async function fetchCityData() {
+      try {
+         setIsLoadingGeocoding(true);
+         const res = await fetch(`${BASE_URL}?latitude=${lat}&longitude=${lng}`, {signal: controller.signal});
+         const data = await res.json();
+         if (!data || !data.city) {
+            throw new Error("City data not found");
+         }
+         setCityName(data.city);
+         setCountry(data.countryCode);
+         console.log("DEBUG: ~ fetchCityData ~ data:", data)
+      } catch (error) {
+         if (error.name !== "AbortError") {
+            console.error("Failed to fetch city data:", error);
+         }
+      } finally {
+         setIsLoadingGeocoding(false);
+      }
+   }
+   
+   fetchCityData();
+   
+   return () => {
+      controller.abort();
+   }
+  }, [lat, lng]);
 
   return (
     <form className={styles.form}>
