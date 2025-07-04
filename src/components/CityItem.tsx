@@ -9,9 +9,16 @@ interface CityItemProps {
 }
 
 function CityItem({ city }: CityItemProps) {
-  const { currentCity } = useCities();
+  const { currentCity, deleteCity } = useCities();
   const { cityName, emoji, date, id, position } = city;
   const { lat, lng } = position;
+
+  const handleDelete = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    if (window.confirm(`Are you sure you want to delete ${cityName}?`)) {
+      await deleteCity(id);
+    }
+  };
   return (
     <li>
       <Link
@@ -23,7 +30,9 @@ function CityItem({ city }: CityItemProps) {
         <span className={styles.emoji}>{emoji}</span>
         <h3 className={styles.name}>{cityName}</h3>
         <time className={styles.date}>({formatDate(date, false)})</time>
-        <button className={styles.deleteBtn}>&times;</button>
+        <button className={styles.deleteBtn} onClick={handleDelete}>
+          &times;
+        </button>
       </Link>
     </li>
   );

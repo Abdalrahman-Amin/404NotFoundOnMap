@@ -1,18 +1,6 @@
 {
   "cities": [
     {
-      "cityName": "Lisbon",
-      "country": "Portugal",
-      "emoji": "🇵🇹",
-      "date": "2027-10-31T15:59:59.138Z",
-      "notes": "My favorite city so far!",
-      "position": {
-        "lat": 38.727881642324164,
-        "lng": -9.140900099907554
-      },
-      "id": "73930385"
-    },
-    {
       "cityName": "Madrid",
       "country": "Spain",
       "emoji": "🇪🇸",
@@ -97,18 +85,6 @@
       }
     },
     {
-      "id": "a84b",
-      "cityName": "Medjedel",
-      "country": "Algeria",
-      "date": "2025-07-03T21:10:33.771Z",
-      "notes": "",
-      "emoji": "🇩🇿",
-      "position": {
-        "lat": "35.02999636902566",
-        "lng": "3.7353515625000004"
-      }
-    },
-    {
       "id": "f4c6",
       "cityName": "Basingstoke",
       "country": "United Kingdom of Great Britain and Northern Ireland (the)",
@@ -154,30 +130,6 @@
       "position": {
         "lat": 35.10305758050401,
         "lng": 3.0335998535156254
-      }
-    },
-    {
-      "id": "6f7e",
-      "cityName": "Sidi Ladjel",
-      "country": "Algeria",
-      "date": "2025-07-03T21:43:41.777Z",
-      "notes": "",
-      "emoji": "🇩🇿",
-      "position": {
-        "lat": 35.44388973159731,
-        "lng": 2.5241088867187504
-      }
-    },
-    {
-      "id": "e279",
-      "cityName": "Sidi Ladjel",
-      "country": "Algeria",
-      "date": "2025-07-03T21:43:41.777Z",
-      "notes": "",
-      "emoji": "🇩🇿",
-      "position": {
-        "lat": 35.432700974455926,
-        "lng": 2.49114990234375
       }
     }
   ]

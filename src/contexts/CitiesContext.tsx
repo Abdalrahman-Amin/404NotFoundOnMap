@@ -99,6 +99,30 @@ function CitiesProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
+  async function deleteCity(id: number) {
+    try {
+      setIsLoading(true);
+      const response = await fetch(`${BASE_URL}/cities/${id}`, {
+        method: "DELETE",
+      });
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      setCities((preCities) => preCities.filter((city) => city.id !== id));
+    } catch (error) {
+      if (
+        typeof error === "object" &&
+        error !== null &&
+        "name" in error &&
+        (error as { name: string }).name !== "AbortError"
+      ) {
+        console.error("Failed to delete city:", error);
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
   return (
     <CitiesContext.Provider
       value={{
@@ -108,6 +132,7 @@ function CitiesProvider({ children }: { children: React.ReactNode }) {
         currentCity,
         getCity,
         createCity,
+        deleteCity,
       }}
     >
       {children}
@@ -134,6 +159,7 @@ type CitiesContextType = {
   currentCity: CityType | null;
   getCity: (id: number) => Promise<void>;
   createCity: (newCity: NewCityType) => Promise<void>;
+  deleteCity: (id: number) => Promise<void>;
 };
 
 export { CitiesProvider, useCities };
