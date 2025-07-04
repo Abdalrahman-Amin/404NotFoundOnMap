@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { CityType, CountryType } from "../types/types";
+import { CityType, CountryType, NewCityType } from "../types/types";
 
 export const BASE_URL = "http://localhost:8000";
 
@@ -34,7 +34,7 @@ function CitiesProvider({ children }: { children: React.ReactNode }) {
         setCities(data);
       } catch (err) {
         if ((err as Error).name !== "AbortError") {
-            console.error("Failed to fetch cities:", err);
+          console.error("Failed to fetch cities:", err);
         }
       } finally {
         setIsLoading(false);
@@ -69,6 +69,36 @@ function CitiesProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
+  async function createCity(newCity: NewCityType) {
+    try {
+      setIsLoading(true);
+      const response = await fetch(`${BASE_URL}/cities`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newCity),
+      });
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const createdCity = await response.json();
+      setCities((prevCities) => [...prevCities, createdCity]);
+      setCurrentCity(createdCity);
+    } catch (err) {
+      if (
+        typeof err === "object" &&
+        err !== null &&
+        "name" in err &&
+        (err as { name: string }).name !== "AbortError"
+      ) {
+        console.error("Failed to fetch city data:", err);
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
   return (
     <CitiesContext.Provider
       value={{
@@ -77,6 +107,7 @@ function CitiesProvider({ children }: { children: React.ReactNode }) {
         countries,
         currentCity,
         getCity,
+        createCity,
       }}
     >
       {children}
@@ -102,6 +133,7 @@ type CitiesContextType = {
   countries: CountryType[];
   currentCity: CityType | null;
   getCity: (id: number) => Promise<void>;
+  createCity: (newCity: NewCityType) => Promise<void>;
 };
 
 export { CitiesProvider, useCities };

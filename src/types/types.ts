@@ -11,6 +11,8 @@ export interface CityType {
   id: number;
 }
 
+export type NewCityType = Omit<CityType, "id">;
+
 export interface CountryType {
   emoji: string;
   country: string;
