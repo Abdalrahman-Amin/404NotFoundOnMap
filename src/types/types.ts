@@ -76,3 +76,24 @@ export type CitiesContextType = {
   createCity: (newCity: NewCityType) => Promise<void>;
   deleteCity: (id: number) => Promise<void>;
 };
+
+export interface AuthState {
+  user: User;
+  isAuthenticated: boolean;
+}
+
+export type User = {
+  name: string;
+  email: string;
+  password: string;
+  avatar: string;
+} | null;
+
+export type AuthActions = { type: "LOGIN"; payload: User } | { type: "LOGOUT" };
+
+export type AuthContextType = {
+  user: User;
+  isAuthenticated: Boolean;
+  login: (email: string, password: string) => void;
+  logout: () => void;
+};
