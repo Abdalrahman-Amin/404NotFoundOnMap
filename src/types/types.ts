@@ -50,3 +50,29 @@ export interface GeocodeResponse {
   countryName?: string;
   countryCode?: string;
 }
+
+export interface CitiesContextState {
+  cities: CityType[];
+  isLoading: boolean;
+  currentCity: CityType | null;
+  error: string;
+}
+
+export type CitiesActions =
+  | { type: "cities/loaded"; payload: CityType[] }
+  | { type: "city/created"; payload: CityType }
+  | { type: "city/deleted"; payload: number }
+  | { type: "loading" }
+  | { type: "rejected"; payload: string }
+  | { type: "city/loaded"; payload: CityType };
+
+export type CitiesContextType = {
+  cities: CityType[];
+  isLoading: boolean;
+  countries: CountryType[];
+  currentCity: CityType | null;
+  error: string;
+  getCity: (id: number) => Promise<void>;
+  createCity: (newCity: NewCityType) => Promise<void>;
+  deleteCity: (id: number) => Promise<void>;
+};
